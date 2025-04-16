@@ -13,7 +13,7 @@ This is my installation process.
 
 - [Ingress-nginx](https://kubernetes.github.io/ingress-nginx/) remains the choice for ingress ad cilium's ingress did not work without manual intervention via changing annotations when using cert-manager and letsencrypt (https://github.com/cilium/cilium/issues/28852). Additionally, the built-in [ModSecurity WAF](https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/modsecurity/), synergy with [Vouch-proxy](https://github.com/vouch/vouch-proxy) and [CertManager](https://cert-manager.io/) are very desireable features.
 
-- [local-path-provisioner](https://github.com/rancher/local-path-provisioner) is provided as a quality-of-life feature. Operators may install additional storage systems at their own discretion.
+- [ceph-block-provisioner](https://github.com/rancher/ceph-block-provisioner) is provided as a quality-of-life feature. Operators may install additional storage systems at their own discretion.
 
 ## Networking
 
@@ -76,8 +76,8 @@ wget -O /var/lib/rancher/rke2/server/manifests/hubble-ingress.yaml \
 wget -O /var/lib/rancher/rke2/server/manifests/nginx-hello.yaml \
     "https://raw.githubusercontent.com/cloudymax/kubevirt-community-stack/refs/heads/main/rke2/server/manifests/nginx-hello.yaml"
 
-wget -O /var/lib/rancher/rke2/server/manifests/local-path-provisioner.yaml \
-    "https://raw.githubusercontent.com/cloudymax/kubevirt-community-stack/refs/heads/main/rke2/server/manifests/local-path-provisioner.yaml"
+wget -O /var/lib/rancher/rke2/server/manifests/ceph-block-provisioner.yaml \
+    "https://raw.githubusercontent.com/cloudymax/kubevirt-community-stack/refs/heads/main/rke2/server/manifests/ceph-block-provisioner.yaml"
 
 wget -O /var/lib/rancher/rke2/server/manifests/multus-config.yaml \
     "https://raw.githubusercontent.com/cloudymax/kubevirt-community-stack/refs/heads/main/rke2/server/manifests/multus-config.yaml"

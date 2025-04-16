@@ -20,7 +20,7 @@ Holds your user-data file. Must be the first boot device
   bootorder: 2
   readonly: false
   pvsize: 32G
-  pvstorageClass: local-path
+  pvstorageClass: ceph-block
   pvaccessMode: ReadWriteOnce
   source: url
   url: "https://cloud.debian.org/images/cloud/bookworm/daily/latest/debian-12-generic-amd64-daily.qcow2"
@@ -35,7 +35,7 @@ Holds your user-data file. Must be the first boot device
   bootorder: 2
   readonly: false
   pvsize: 32G
-  pvstorageClassName: local-path
+  pvstorageClassName: ceph-block
   nodePlacement: node0
   pvaccessMode: ReadWriteOnce
   source: pvc
@@ -52,7 +52,7 @@ Holds your user-data file. Must be the first boot device
   bootorder: 1
   readonly: true
   pvsize: 8G
-  pvstorageClassName: local-path
+  pvstorageClassName: ceph-block
   nodePlacement: node0
   pvaccessMode: ReadWriteOnce
   source: "https://www.itechtics.com/?dl_id=173"
@@ -67,7 +67,7 @@ Holds your user-data file. Must be the first boot device
   bootorder: 2
   readonly: false
   pvsize: 32G
-  pvstorageClassName: local-path
+  pvstorageClassName: ceph-block
   nodePlacement: node0
   pvaccessMode: ReadWriteOnce
 ```

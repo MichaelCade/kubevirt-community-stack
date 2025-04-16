@@ -243,7 +243,7 @@ disks:
   #   bootorder: 2
   #   readonly: false
   #   pvsize: 64G
-  #   pvstorageClassName: local-path
+  #   pvstorageClassName: ceph-block
   #   nodePlacement: scremlin
   #   pvaccessMode: ReadWriteOnce
   #   source: pvc
@@ -259,7 +259,7 @@ disks:
 #   bootorder: 1
 #   readonly: true
 #   pvsize: 8G
-#   pvstorageClassName: local-path
+#   pvstorageClassName: ceph-block
 #   nodePlacement: node0
 #   pvaccessMode: ReadWriteOnce
 #   source: "https://www.itechtics.com/?dl_id=173"
@@ -273,7 +273,7 @@ disks:
 #   bootorder: 2
 #   readonly: false
 #   pvsize: 32G
-#   pvstorageClassName: local-path
+#   pvstorageClassName: ceph-block
 #   nodePlacement: node0
 #   pvaccessMode: ReadWriteOnce
 

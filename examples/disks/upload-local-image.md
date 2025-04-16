@@ -7,7 +7,7 @@ Examples of how to create PVCs using the CLI instead of config files
 ```bash
 export VOLUME_NAME=debian12-pvc
 export NAMESPACE="default"
-export STORAGE_CLASS="local-path"
+export STORAGE_CLASS="ceph-block"
 export ACCESS_MODE="ReadWriteOnce"
 export IMAGE_URL="https://cloud.debian.org/images/cloud/bookworm/daily/latest/debian-12-generic-amd64-daily.qcow2"
 export IMAGE_PATH=debian-12-generic-amd64-daily.qcow2
@@ -32,7 +32,7 @@ time virtctl image-upload $VOLUME_TYPE $VOLUME_NAME \
 ```bash
 export VOLUME_NAME="windows10-iso-pvc"
 export NAMESPACE="default"
-export STORAGE_CLASS="local-path"
+export STORAGE_CLASS="ceph-block"
 export ACCESS_MODE="ReadWriteOnce"
 export IMAGE_URL="https://www.itechtics.com/?dl_id=173"
 export IMAGE_PATH="Win10_22H2_EnglishInternational_x64.iso"

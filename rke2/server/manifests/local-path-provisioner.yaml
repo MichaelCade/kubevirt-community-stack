@@ -1,21 +1,21 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: local-path-storage
+  name: ceph-block-storage
 
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: local-path-provisioner-service-account
-  namespace: local-path-storage
+  name: ceph-block-provisioner-service-account
+  namespace: ceph-block-storage
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: local-path-provisioner-role
-  namespace: local-path-storage
+  name: ceph-block-provisioner-role
+  namespace: ceph-block-storage
 rules:
   - apiGroups: [""]
     resources: ["pods"]
@@ -25,7 +25,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: local-path-provisioner-role
+  name: ceph-block-provisioner-role
 rules:
   - apiGroups: [""]
     resources: ["nodes", "persistentvolumeclaims", "configmaps", "pods", "pods/log"]
@@ -44,54 +44,54 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: local-path-provisioner-bind
-  namespace: local-path-storage
+  name: ceph-block-provisioner-bind
+  namespace: ceph-block-storage
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: local-path-provisioner-role
+  name: ceph-block-provisioner-role
 subjects:
   - kind: ServiceAccount
-    name: local-path-provisioner-service-account
-    namespace: local-path-storage
+    name: ceph-block-provisioner-service-account
+    namespace: ceph-block-storage
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: local-path-provisioner-bind
+  name: ceph-block-provisioner-bind
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: local-path-provisioner-role
+  name: ceph-block-provisioner-role
 subjects:
   - kind: ServiceAccount
-    name: local-path-provisioner-service-account
-    namespace: local-path-storage
+    name: ceph-block-provisioner-service-account
+    namespace: ceph-block-storage
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: local-path-provisioner
-  namespace: local-path-storage
+  name: ceph-block-provisioner
+  namespace: ceph-block-storage
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: local-path-provisioner
+      app: ceph-block-provisioner
   template:
     metadata:
       labels:
-        app: local-path-provisioner
+        app: ceph-block-provisioner
     spec:
-      serviceAccountName: local-path-provisioner-service-account
+      serviceAccountName: ceph-block-provisioner-service-account
       containers:
-        - name: local-path-provisioner
-          image: rancher/local-path-provisioner:v0.0.30
+        - name: ceph-block-provisioner
+          image: rancher/ceph-block-provisioner:v0.0.30
           imagePullPolicy: IfNotPresent
           command:
-            - local-path-provisioner
+            - ceph-block-provisioner
             - --debug
             - start
             - --config
@@ -109,14 +109,14 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: local-path-config
+            name: ceph-block-config
 
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: local-path
-provisioner: rancher.io/local-path
+  name: ceph-block
+provisioner: rancher.io/ceph-block
 volumeBindingMode: WaitForFirstConsumer
 reclaimPolicy: Delete
 
@@ -128,8 +128,8 @@ metadata:
     objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
     objectset.rio.cattle.io/owner-name: local-storage
     objectset.rio.cattle.io/owner-namespace: kube-system
-  name: local-path-config
-  namespace: local-path-storage
+  name: ceph-block-config
+  namespace: ceph-block-storage
 data:
   config.json: |-
     {
@@ -137,13 +137,13 @@ data:
                 {
                         "node": "DEFAULT_PATH_FOR_NON_LISTED_NODES",
                         "paths": [
-                                "/opt/local-path-provisioner"
+                                "/opt/ceph-block-provisioner"
                         ]
                 },
                 {
                         "node": "bradley",
                         "paths": [
-                                "/opt/local-path-provisioner"
+                                "/opt/ceph-block-provisioner"
                         ]
                 },
                 {
