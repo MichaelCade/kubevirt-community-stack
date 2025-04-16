@@ -66,8 +66,7 @@ disks:
   bootorder: 1
   readonly: true
   pvsize: 8Gi
-  nodePlacement: bradley
-  pvstorageClass: local-path
+  pvstorageClass: ceph-block
   pvaccessMode: ReadWriteOnce
   source: pvc
   pvcnamespace: kubevirt
@@ -87,7 +86,7 @@ disks:
   bootorder: 2
   readonly: false
   pvsize: 32G
-  pvstorageClass: local-path
+  pvstorageClass: ceph-block
   pvaccessMode: ReadWriteOnce
 
 - name: windows-guest-tools
