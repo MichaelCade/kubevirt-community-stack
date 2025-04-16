@@ -212,7 +212,7 @@ disks:
    # -- Size of disk in GB
    pvsize: 16Gi
    # -- Storage class to use for the pvc
-   pvstorageClassName: fast-raid
+   pvstorageClassName: ceph-block
    # -- Access mode for the PVC
    pvaccessMode: ReadWriteOnce
    # -- source type of the disk image. One of `url`, `pvc`
@@ -526,7 +526,7 @@ service:
 # -- Ingress configuration
 ingress:
   enabled: false
-  className: "nginx"
+  className: "cilium"
   hostname: "novnc.buildstar.online"
   annotations: {}
   #  cert-manager.io/cluster-issuer: "letsencrypt-staging"
