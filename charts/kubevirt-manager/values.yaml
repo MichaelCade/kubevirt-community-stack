@@ -1,7 +1,7 @@
 replicaCount: 1
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8080
   protocol: TCP
   name: http
@@ -11,15 +11,6 @@ prometheus:
   serviceName: "thanos-app-query-frontend"
   serviceNamesapce: "default"
 
-ingress:
-  enabled: false
-  className: "nginx"
-  hostname: "kubevirt.example.com"
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
-    nginx.org/location-snippets: |
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection $connection_upgrade;
   tls:
     enabled: false
     secretName: "tls-kubevirt-manager"
